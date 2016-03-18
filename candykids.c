@@ -50,14 +50,45 @@ int main(int argc, char *argv[]){
 
 	//init factories arrays.
 	stats_init(factories);
+
+	//1 candy
 	stats_record_produced(0);
 
 	//testing only
 	struct timespec start_time, end_time;
  	clock_gettime(CLOCK_PROCESS_CPUTIME_ID, &start_time);
- 	
+
  	//timespec_to_ms(&start_time) should be replaced with candy->stamptime
 	stats_record_consumed(0,timespec_to_ms(&start_time));
+
+	//2 candies
+	stats_record_produced(0);
+	//testing only
+ 	clock_gettime(CLOCK_PROCESS_CPUTIME_ID, &start_time);
+ 	//timespec_to_ms(&start_time) should be replaced with candy->stamptime
+	stats_record_consumed(0,timespec_to_ms(&start_time));
+
+	//3 candies
+	stats_record_produced(0);
+	//testing only
+ 	clock_gettime(CLOCK_PROCESS_CPUTIME_ID, &start_time);
+ 	//timespec_to_ms(&start_time) should be replaced with candy->stamptime
+	stats_record_consumed(0,timespec_to_ms(&start_time));
+
+	//4 candies
+	stats_record_produced(0);
+	//testing only
+ 	clock_gettime(CLOCK_PROCESS_CPUTIME_ID, &start_time);
+ 	//timespec_to_ms(&start_time) should be replaced with candy->stamptime
+	stats_record_consumed(0,timespec_to_ms(&start_time));
+
+	//5 candies
+	stats_record_produced(0);
+	//testing only
+ 	clock_gettime(CLOCK_PROCESS_CPUTIME_ID, &start_time);
+ 	//timespec_to_ms(&start_time) should be replaced with candy->stamptime
+	stats_record_consumed(0,timespec_to_ms(&start_time));
+
 
 	
  // 	/* begin timing */
