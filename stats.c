@@ -47,13 +47,11 @@ void stats_record_produced(int factory_number){
 	numMade[factory_number]++;
 
 	/* begin timing */
- 	clock_gettime(CLOCK_PROCESS_CPUTIME_ID, &start_time);
- 	double tempTime = timespec_to_ms(&start_time);
- 	avgDelay[factory_number] = tempTime;
- 	printf("Candy created at: %f ms\n", tempTime);
- 	
+ 	// clock_gettime(CLOCK_PROCESS_CPUTIME_ID, &start_time);
+ 	// double tempTime = timespec_to_ms(&start_time);
+ 	// avgDelay[factory_number] = tempTime;
+ 	// printf("Candy created at: %f ms\n", tempTime);
 
- 	
 
  	//checking if the timing works
  	// printf("Start time from stats.c: %f ms\n", timespec_to_ms(&start_time));
@@ -71,27 +69,36 @@ void stats_record_consumed(int factory_number, double delay_in_ms){
  	double totalTime = timespec_to_ms(&end_time) - delay_in_ms;
 
  	totalDelay[factory_number] = totalTime;
+ 	printf("%f\n",totalTime );
 
- 	//check min delay
- 	if(totalTime < minDelay[factory_number]){
+ 	//set min and max when the first candy is eaten
+ 	if(numEaten[factory_number] == 1){
  		minDelay[factory_number] = totalTime;
- 	}
-
- 	//check max delay
- 	else if (totalTime > maxDelay[factory_number]){
  		maxDelay[factory_number] = totalTime;
- 	
+
  	}
+	else{
+		//check min delay
+		if(totalTime < minDelay[factory_number]){
+			minDelay[factory_number] = totalTime;
+		}	
+
+		//check max delay
+		else if (totalTime > maxDelay[factory_number]){
+			maxDelay[factory_number] = totalTime;
+			}
+	}
+ 	
+
+ 	avgDelay[factory_number] =(double) totalTime/ numMade[factory_number];
 
 }
 
 void stats_display(void){
 
-	int made = 0;
-	int eaten = 0;
 	//compare the #Made column and #Eaten column
 
-	printf("From stats.c\n");
+	// printf("From stats.c\n");
 	printf("%8s%10s%10s%20s%20s%20s%20s\n","Factory # ", "#Made:","#Eaten", 
 					"Min Delay[ms]", "Avg Delay[ms]", "Max Delay[ms]", "total Delay[ms]");
 
